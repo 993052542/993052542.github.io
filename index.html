@@ -190,6 +190,99 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/17/Redis中的Sentinel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+              
+              <a href="/2020/02/17/Redis中的Sentinel/" class="post-title-link" itemprop="url">Redis中的Sentinel</a>
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
+
+              
+                
+              
+
+              <time title="Erstellt: 2020-02-17 10:31:27 / Geändert am: 12:03:07" itemprop="dateCreated datePublished" datetime="2020-02-17T10:31:27+08:00">2020-02-17</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Redis中的Sentinel"><a href="#Redis中的Sentinel" class="headerlink" title="Redis中的Sentinel"></a>Redis中的Sentinel</h1><p>​    Sentinel（哨兵）是Redis的高可用解决方案：由一个或多个redis服务器组成Sentinel系统，可以简直任意多个主服务器，以及这些主服务器属下的从服务器，并在被监视的主服务器下线时，自动将下线服务器的某个从服务器升级为主服务器，然后由新的主服务器代替已下线的主服务器处理命令请求。</p>
+<p>下图展示了一个Sentinel系统监视服务器的例子：</p>
+<ul>
+<li>双环图案表示的是当前的主服务器server1；</li>
+<li>单环图案表示的是当前的主服务器的三个从服务器server2、server3、server4；</li>
+<li>从服务器正在复制主服务器，Sentinel则在监视四个服务器</li>
+</ul>
+<p><img src="/2020/02/17/Redis中的Sentinel/1.png" alt></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/02/17/Redis中的Sentinel/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/16/Redis中的数据结构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -393,7 +486,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
