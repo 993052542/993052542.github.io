@@ -48,9 +48,9 @@
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Copy',
-      copy_success: 'Copied',
-      copy_failure: 'Copy failed'
+      copy_button: 'Kopieren',
+      copy_success: 'Kopiert',
+      copy_failure: 'Kopieren fehlgeschlagen'
     }
   };
 </script>
@@ -132,7 +132,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button aria-label="Navigationsleiste an/ausschalten">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -152,7 +152,7 @@
       
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
       
@@ -163,7 +163,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
   </ul>
@@ -183,6 +183,97 @@
           <div id="content" class="content page-home">
             
   <section id="posts" class="posts-expand">
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/19/Redis的持久化功能实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">
+              
+              <a href="/2020/02/19/Redis的持久化功能实现/" class="post-title-link" itemprop="url">Redis的持久化功能实现</a>
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
+
+              
+                
+              
+
+              <time title="Erstellt: 2020-02-19 12:34:49 / Geändert am: 14:28:10" itemprop="dateCreated datePublished" datetime="2020-02-19T12:34:49+08:00">2020-02-19</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Redis的持久化功能实现"><a href="#Redis的持久化功能实现" class="headerlink" title="Redis的持久化功能实现"></a>Redis的持久化功能实现</h1><h2 id="1-RDB持久化"><a href="#1-RDB持久化" class="headerlink" title="1. RDB持久化"></a>1. RDB持久化</h2><p>​    因为Redis是内存数据库，它将自己的数据库状态存储在内存中，所以如果不想办法将存储在内存中的数据库状态保存到磁盘，那么服务器进程退出时，数据也将丢失。为了解决这个问题，Redis提供了RDB持久化功能。</p>
+<h3 id="1-1-RDB文件的创建与载入"><a href="#1-1-RDB文件的创建与载入" class="headerlink" title="1.1 RDB文件的创建与载入"></a>1.1 RDB文件的创建与载入</h3><p>​    有两个命令可以用于生成RDB文件，一个是SAVE，另一个是BGSAVE。    </p>
+<ol>
+<li><p>SAVE命令：SAVE命令会阻塞服务器进程，直到RDB文件创建完毕为止，在服务器进程阻塞期间，服务器不能处理任何命令请求；</p>
+</li>
+<li><p>BGSAVE命令：当使用BGSAVE命令时，服务器会派生出一个子进程来创建RDB文件夹，主进程继续处理命令请求。在BGSAVE执行期间，客户端发送的SAVE命令和BGSAVE命令会被拒绝，防止出现竞争条件。另外：BGREWRITEAOF也不能和BGSAVE同时执行</p></li></ol>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/02/19/Redis的持久化功能实现/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
       
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -216,13 +307,13 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
 
               
                 
               
 
-              <time title="Created: 2020-02-18 11:16:22 / Modified: 13:46:41" itemprop="dateCreated datePublished" datetime="2020-02-18T11:16:22+08:00">2020-02-18</time>
+              <time title="Erstellt: 2020-02-18 11:16:22 / Geändert am: 13:46:41" itemprop="dateCreated datePublished" datetime="2020-02-18T11:16:22+08:00">2020-02-18</time>
             </span>
           
             
@@ -247,7 +338,7 @@
           
             <div class="post-button text-center">
               <a class="btn" href="/2020/02/18/排序算法/#more" rel="contents">
-                Read more &raquo;
+                Weiterlesen &raquo;
               </a>
             </div>
           
@@ -303,13 +394,13 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
 
               
                 
               
 
-              <time title="Created: 2020-02-17 10:31:27 / Modified: 12:03:07" itemprop="dateCreated datePublished" datetime="2020-02-17T10:31:27+08:00">2020-02-17</time>
+              <time title="Erstellt: 2020-02-17 10:31:27 / Geändert am: 12:03:07" itemprop="dateCreated datePublished" datetime="2020-02-17T10:31:27+08:00">2020-02-17</time>
             </span>
           
             
@@ -340,7 +431,7 @@
           
             <div class="post-button text-center">
               <a class="btn" href="/2020/02/17/Redis中的Sentinel/#more" rel="contents">
-                Read more &raquo;
+                Weiterlesen &raquo;
               </a>
             </div>
           
@@ -396,13 +487,13 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
 
               
                 
               
 
-              <time title="Created: 2020-02-16 10:31:19 / Modified: 13:35:34" itemprop="dateCreated datePublished" datetime="2020-02-16T10:31:19+08:00">2020-02-16</time>
+              <time title="Erstellt: 2020-02-16 10:31:19 / Geändert am: 13:35:34" itemprop="dateCreated datePublished" datetime="2020-02-16T10:31:19+08:00">2020-02-16</time>
             </span>
           
             
@@ -428,7 +519,7 @@
           
             <div class="post-button text-center">
               <a class="btn" href="/2020/02/16/Redis中的数据结构/#more" rel="contents">
-                Read more &raquo;
+                Weiterlesen &raquo;
               </a>
             </div>
           
@@ -484,13 +575,13 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">Veröffentlicht am</span>
 
               
                 
               
 
-              <time title="Created: 2020-02-15 02:58:04 / Modified: 12:05:47" itemprop="dateCreated datePublished" datetime="2020-02-15T02:58:04+08:00">2020-02-15</time>
+              <time title="Erstellt: 2020-02-15 02:58:04 / Geändert am: 12:05:47" itemprop="dateCreated datePublished" datetime="2020-02-15T02:58:04+08:00">2020-02-15</time>
             </span>
           
             
@@ -516,7 +607,7 @@
           
             <div class="post-button text-center">
               <a class="btn" href="/2020/02/15/hashmap的线程安全问题/#more" rel="contents">
-                Read more &raquo;
+                Weiterlesen &raquo;
               </a>
             </div>
           
@@ -573,8 +664,8 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">Artikel</span>
         </a>
       </div>
     
@@ -591,7 +682,7 @@
           
         
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">tags</span>
+        <span class="site-state-item-name">schlagwörter</span>
         
       </div>
     
@@ -618,9 +709,9 @@
   </span>
   <span class="author" itemprop="copyrightHolder">John Doe</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
 
         
 
