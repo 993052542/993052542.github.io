@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    save_scroll: false,
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="1. URI 与 URL URI：统一资源标识符：标识某一互联网的资源 URL：统一资源定位符：表示互联网资源所在的地址">
+<meta name="keywords" content="计算机网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP协议">
+<meta property="og:url" content="http://yoursite.com/2020/02/24/HTTP/index.html">
+<meta property="og:site_name" content="经常咕咕的菜鸡博客">
+<meta property="og:description" content="1. URI 与 URL URI：统一资源标识符：标识某一互联网的资源 URL：统一资源定位符：表示互联网资源所在的地址">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2020/02/24/HTTP/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/24/HTTP/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/24/HTTP/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/24/HTTP/4.png">
+<meta property="og:updated_time" content="2020-02-24T10:20:29.283Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP协议">
+<meta name="twitter:description" content="1. URI 与 URL URI：统一资源标识符：标识某一互联网的资源 URL：统一资源定位符：表示互联网资源所在的地址">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/24/HTTP/1.png">
+  <link rel="canonical" href="http://yoursite.com/2020/02/24/HTTP/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>HTTP协议 | 经常咕咕的菜鸡博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <div class="container sidebar-position-left">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">经常咕咕的菜鸡博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>文章</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+    </div>
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    <div class="reading-progress-bar"></div>
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/24/HTTP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="经常咕咕的菜鸡博客">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/QQ图片20200223231821.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="经常咕咕的菜鸡博客">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">HTTP协议
+
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-24 15:33:24 / 修改时间：18:20:29" itemprop="dateCreated datePublished" datetime="2020-02-24T15:33:24+08:00">2020-02-24</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="fa fa-comment-o"></i>
+    </span>
+    <span class="post-meta-item-text">评论数：</span>
+  
+    <a href="/2020/02/24/HTTP/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/24/HTTP/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-URI-与-URL"><a href="#1-URI-与-URL" class="headerlink" title="1. URI 与 URL"></a>1. URI 与 URL</h1><ul>
+<li>URI：统一资源标识符：标识某一互联网的资源</li>
+<li>URL：统一资源定位符：表示互联网资源所在的地址</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="2-HTTP-方法"><a href="#2-HTTP-方法" class="headerlink" title="2. HTTP 方法"></a>2. HTTP 方法</h1><p>​    客户端发送的请求报文第一行为请求行，包含了方法字段。</p>
+<ul>
+<li>GET：获取资源。GET 方法用来请求访问已被URI识别的资源。指定的资源经服务端解析后返回响应内容</li>
+<li>POST：传输实体主体。POST 方法主要用来传输数据。</li>
+<li>HEAD：获取报文首部。和GET方法类似，但是不返回报文实体主体部分。主要用于确认URL的有效性以及资源更新的日期时间等。</li>
+<li>PUT；传输文件。</li>
+<li>PATCH：对资源进行部分修改。PUT 方法也可以用于修改资源，但是只能完全替代，而PATCH 运行部分修改。</li>
+<li>DELETE：删除文件。</li>
+</ul>
+<h1 id="3-HTTP-状态码"><a href="#3-HTTP-状态码" class="headerlink" title="3. HTTP 状态码"></a>3. HTTP 状态码</h1><h2 id="3-1-1XX-表示正在对请求进行处理"><a href="#3-1-1XX-表示正在对请求进行处理" class="headerlink" title="3.1 1XX 表示正在对请求进行处理"></a>3.1 1XX 表示正在对请求进行处理</h2><ul>
+<li>100：表明到目前为止都很正常，客户端可以继续发送请求或忽略这个响应。</li>
+</ul>
+<h2 id="3-2-2XX-表示请求被成功处理"><a href="#3-2-2XX-表示请求被成功处理" class="headerlink" title="3.2 2XX 表示请求被成功处理"></a>3.2 2XX 表示请求被成功处理</h2><ul>
+<li>200：客户端发来的请求被正常处理了。</li>
+<li>204：请求处理成功了，但是没有资源可以返回。</li>
+<li>206：客户端进行了范围请求，服务器成功执行了这部分的请求。</li>
+</ul>
+<h2 id="3-3-3XX-重定向"><a href="#3-3-3XX-重定向" class="headerlink" title="3.3 3XX 重定向"></a>3.3 3XX 重定向</h2><ul>
+<li>301：永久性重定向，请求的资源已经被分配新的URI，用户以后也应该使用新的URI。</li>
+<li>302：临时性重定向，请求的资源已经被分配新的URI，希望用户本次能使用该URI来访问，但是该资源的URI后面可能还会变化。</li>
+</ul>
+<h2 id="3-4-4XX-客户端错误"><a href="#3-4-4XX-客户端错误" class="headerlink" title="3.4 4XX 客户端错误"></a>3.4 4XX 客户端错误</h2><ul>
+<li>400：请求报文中存在语法错误，服务器无法识别。</li>
+<li>403：客户端请求的资源被服务器拒绝了。</li>
+<li>404：请求的资源不存在。</li>
+</ul>
+<h2 id="3-5-5XX-服务器错误"><a href="#3-5-5XX-服务器错误" class="headerlink" title="3.5 5XX 服务器错误"></a>3.5 5XX 服务器错误</h2><ul>
+<li>500：服务器内部发生错误。</li>
+<li>502：常出现于nginx服务器中，由于 FastCGI 缓冲区过小、php-fpm 的进程数设置过少、php 执行超时等。</li>
+<li>503：服务器由于正在停机维护或者暂时处于超负载，无法处理请求。</li>
+<li>504：网关超时，当服务器作为网关或代理，没有及时从上有服务器收到请求。</li>
+</ul>
+<h1 id="4-Cookie-与-Session"><a href="#4-Cookie-与-Session" class="headerlink" title="4. Cookie 与 Session"></a>4. Cookie 与 Session</h1><h2 id="4-1-Cookie"><a href="#4-1-Cookie" class="headerlink" title="4.1 Cookie"></a>4.1 Cookie</h2><p>​    HTTP 协议是无状态的，主要是为了让 HTTP 协议尽可能简单，使得它能处理大量的数据。HTTP/1.1 引入 Cookie 来保存状态信息。</p>
+<p>​    Cookie 是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器之后向同一服务器再次发起请求时被携带上，用于告知服务端两个请求是否来自同一个浏览器。由于之后每次请求都会需要携带 cookie 数据，因此会带来额外的性能开销。</p>
+<h3 id="4-1-1-用途"><a href="#4-1-1-用途" class="headerlink" title="4.1.1 用途"></a>4.1.1 用途</h3><ol>
+<li>会话状态管理（如用户登录状态、购物车等信息）</li>
+<li>个性化设置（如用户自定义设置、主题等）</li>
+</ol>
+<h3 id="4-1-2-创建过程"><a href="#4-1-2-创建过程" class="headerlink" title="4.1.2 创建过程"></a>4.1.2 创建过程</h3><p>​    服务器发送的响应报文包含 Set-Cookie 首部字段，客户端得到响应报文后把 Cookie 内保存到浏览器中。</p>
+<p>​    客户端之后对同一服务器发送请求时，会从浏览器取出 Cookie 信息并通过 Cookie 请求首部字段发送给服务器。</p>
+<h3 id="4-1-3-Secure"><a href="#4-1-3-Secure" class="headerlink" title="4.1.3 Secure"></a>4.1.3 Secure</h3><p>​    标记为 Secure 的 Cookie 只能通过被 HTTPS 协议加密过的请求发送给服务端。但即便设置了 Secure 标记，敏感信息也不应该通过 Cookie 传输，因为 Cookie 有其固有的不安全性，Secure 标记也无法提供确实的安全保障。</p>
+<h2 id="4-2-Session"><a href="#4-2-Session" class="headerlink" title="4.2 Session"></a>4.2 Session</h2><p>​    Session 用于记录用户在服务器上的状态，可以存储在服务端上的文件、数据库或内存中，也可以将 Session 存储在 Redis 这种内存型数据库中。</p>
+<p>​    使用 Session 维护用户登录状态的过程如下：</p>
+<ul>
+<li>用户进行登录时，用户提交包含用户名和密码的表单，放入 HTTP 请求报文中；</li>
+<li>服务器验证该用户名和密码，如果正确则把用户信息存储到 Redis 中，它在 Redis 中的 key 称为 Session ID;</li>
+<li>服务器返回的响应报文的 Set-Cookie 首部字段包含了这个 Session ID，客户端收到响应报文之后将该 Cookie值存入浏览器中；</li>
+<li>客户端之后对同一服务器进行请求时会包含该 Cookie 值，服务器收到之后提取出 Session ID，从 Rediis 中取出用户信息，继续之前的业务操作。</li>
+</ul>
+<h2 id="4-3-Cookie-与-Session-选择"><a href="#4-3-Cookie-与-Session-选择" class="headerlink" title="4.3 Cookie 与 Session 选择"></a>4.3 Cookie 与 Session 选择</h2><ul>
+<li>Cookie 只能存储 ASCII 码字符串，而 Session 可以存储任何类型的数据，因此在考虑数据复杂性时首选可以 Session；</li>
+<li>Cookie 存储在浏览器中，而 Session 存储在服务器中</li>
+<li>不建议将所有的用户信息都存储在 Session 中，开销会非常大。</li>
+</ul>
+<h1 id="5-HTTP-1-0-和-HTTP-1-1-的区别"><a href="#5-HTTP-1-0-和-HTTP-1-1-的区别" class="headerlink" title="5. HTTP 1.0 和 HTTP 1.1 的区别"></a>5. HTTP 1.0 和 HTTP 1.1 的区别</h1><ol>
+<li>长连接：在HTTP 1.0中，默认使用的是短链接，也就是说每次请求都会建立一次连接，请求次数过多的话会造成开销较大，可以用一个长连接来发多个请求。在 HTTP 1.1中，默认使用长连接。且长连接方式分为流水线和非流水线方式。<ol>
+<li>流水线方式：客户端在收到 HTTP 响应报文之前，可以接着发送请求报文；</li>
+<li>非流水线方式：客户端在收到前一个响应之后才能发送下一个请求。</li>
+</ol>
+</li>
+<li>错误状态响应码：在HTTP 1.1 之中，新增了24个错误状态响应码。</li>
+<li>支持同时打开多个TCP连接。</li>
+</ol>
+<h1 id="6-HTTPS"><a href="#6-HTTPS" class="headerlink" title="6. HTTPS"></a>6. HTTPS</h1><p>​    HTTP 有以下安全问题：</p>
+<ul>
+<li>使用明文进行通信，内容可能被窃听；</li>
+<li>无法验证通信方的身份，通信方的身份有可能是被伪装的；</li>
+<li>无法证明报文的完整性，报文有可能遭篡改</li>
+</ul>
+<p>​        HTTP 并不是新协议，而是让 HTTP 建立在 SSL 与 TLS 协议之上，通过 SSL 之后，HTTPS 具有了加密、认证、和完整性保护。</p>
+<h2 id="6-1-加密"><a href="#6-1-加密" class="headerlink" title="6.1 加密"></a>6.1 加密</h2><h3 id="6-1-1-对称密钥加密"><a href="#6-1-1-对称密钥加密" class="headerlink" title="6.1.1 对称密钥加密"></a>6.1.1 对称密钥加密</h3><p>​    对称密钥加密，加密和解密使用的是同一个密钥。</p>
+<ul>
+<li>优点：运算速度快；</li>
+<li>缺点：无法安全的将密钥传输给通信方。</li>
+</ul>
+<p><img src="/2020/02/24/HTTP/1.png" alt></p>
+<h3 id="6-1-2-非对称密钥加密"><a href="#6-1-2-非对称密钥加密" class="headerlink" title="6.1.2 非对称密钥加密"></a>6.1.2 非对称密钥加密</h3><p>​    非对称密钥加密，又称公开密钥加密，加密和解密使用不同的密钥。公开密钥所有人都可以获得，通信方获得接收方的公开密钥后，就可以使用公开密钥加密，接收方收到通信内容后，使用私有密钥解密。</p>
+<ul>
+<li>优点：可以更安全地将公开密钥传输给通信方；</li>
+<li>缺点：运算速度慢。</li>
+</ul>
+<p><img src="/2020/02/24/HTTP/2.png" alt></p>
+<h3 id="6-1-3-HTTPS采用的加密方式"><a href="#6-1-3-HTTPS采用的加密方式" class="headerlink" title="6.1.3 HTTPS采用的加密方式"></a>6.1.3 HTTPS采用的加密方式</h3><p>​    HTTPS采用混合的加密机制：</p>
+<ol>
+<li>使用非堆成加秘的方式，传输对称密钥加密方式所需要的 Secret Key，从而保证了安全性；</li>
+<li>获取到 Secret Key 后，再使用对称加密方式进行通信，从而保证效率。</li>
+</ol>
+<h2 id="6-2-证书"><a href="#6-2-证书" class="headerlink" title="6.2 证书"></a>6.2 证书</h2><p>​    通过使用证书来对通信方进行认证。数字认证机构是客户端与服务端双方都可信赖的第三方机构。</p>
+<p>​    服务器的运营人员向数字认证机构提出公开密钥的申请，认证机构在判明提出申请者的身份之后，会对已申请的公开密钥做数字签名，然后分配这个已签名的公开密钥，并将该公开密钥放入公开密钥证书中。进行 HTTPS 通信时，服务器会把证书发送给客户端。客户端取得其中的公开密钥后，先使用数字签名认证，如果验证通过，就可以开始通信了。</p>
+<p><img src="/2020/02/24/HTTP/3.png" alt></p>
+<h2 id="6-3-完整性保护"><a href="#6-3-完整性保护" class="headerlink" title="6.3 完整性保护"></a>6.3 完整性保护</h2><p>​    HTTPS 的报文摘要之所以安全，是因为它结合了加密和认证这两个操作。因为加密之后的报文，遭到篡改之后很难重新计算报文摘要，因为无法轻易获取明文。</p>
+<h2 id="6-4-HTTPS-的握手过程"><a href="#6-4-HTTPS-的握手过程" class="headerlink" title="6.4 HTTPS 的握手过程"></a>6.4 HTTPS 的握手过程</h2><p><img src="/2020/02/24/HTTP/4.png" alt></p>
+<ol>
+<li>客户端发送一个 Client Hello 报文，里面包含了一个随机数 Random1、客户端支持的 SSL 版本以及支持的加密组件列表；</li>
+<li>服务端收到后，会发送一个 Server Hello 报文，其中包含了另一个随机数 Random2、后续会使用的 SSL 版本以及加密组件；</li>
+<li>服务端再发送一个 Certificate 报文，其中包含了绑定了公开密钥的证书；</li>
+<li>服务端发送一个 Server Hello Done 报文，表示第一次握手结束；</li>
+<li>客户端生成一个随机数 Random3，并使用公开密钥加密为 Pre-Master key，发送一个 Client Key Change 报文，服务端通过私有密钥解密，获得随机数3，此时客户端和服务端都有了 Random1+Random2+Random3,然后两边再根据相同的算法就可以生成一份共享密钥，后面的报文都会使用该密钥来加密；</li>
+<li>客户端发送一个 Change Cipher Spec 报文，此时这个报文已经使用共享密钥加密；</li>
+<li>客户端再发送一个 Finished 报文，该报文包含连接至今的所有报文的校验值，如果服务端能用协商好的密钥解密，则证明密钥是一致的；</li>
+<li>服务端也发送一个 Change Cipher Spec 报文；</li>
+<li>服务端再发送一个 Server Finished 报文，如果客户端能用协商好的密钥解密，则证明密钥是一致的；</li>
+</ol>
+<h1 id="7-浏览器中输入URL地址—-gt-显示主页的过程"><a href="#7-浏览器中输入URL地址—-gt-显示主页的过程" class="headerlink" title="7. 浏览器中输入URL地址—-&gt;显示主页的过程"></a>7. 浏览器中输入URL地址—-&gt;显示主页的过程</h1><ol>
+<li>浏览器查找域名的IP地址（DNS协议）</li>
+<li>TCP连接（TCP协议、IP协议、OPSF协议、ARP协议）</li>
+<li>浏览器向WEB服务器发送一个HTTP请求（HTTP协议）</li>
+<li>服务器处理请求并返回HTTP响应报文</li>
+<li>浏览器解析并渲染页面</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/计算机网络/" rel="tag"># 计算机网络</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/2020/02/24/TCP与UDP/" rel="next" title="TCP与UDP">
+                <i class="fa fa-chevron-left"></i> TCP与UDP
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/QQ图片20200223231821.jpg"
+      alt="经常咕咕的菜鸡博客">
+  <p class="site-author-name" itemprop="name">经常咕咕的菜鸡博客</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-URI-与-URL"><span class="nav-number">1.</span> <span class="nav-text">1. URI 与 URL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-HTTP-方法"><span class="nav-number">2.</span> <span class="nav-text">2. HTTP 方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-HTTP-状态码"><span class="nav-number">3.</span> <span class="nav-text">3. HTTP 状态码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-1XX-表示正在对请求进行处理"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 1XX 表示正在对请求进行处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-2XX-表示请求被成功处理"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 2XX 表示请求被成功处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-3XX-重定向"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 3XX 重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-4XX-客户端错误"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 4XX 客户端错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-5XX-服务器错误"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 5XX 服务器错误</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Cookie-与-Session"><span class="nav-number">4.</span> <span class="nav-text">4. Cookie 与 Session</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Cookie"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 Cookie</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-1-用途"><span class="nav-number">4.1.1.</span> <span class="nav-text">4.1.1 用途</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-2-创建过程"><span class="nav-number">4.1.2.</span> <span class="nav-text">4.1.2 创建过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-3-Secure"><span class="nav-number">4.1.3.</span> <span class="nav-text">4.1.3 Secure</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Session"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 Session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-Cookie-与-Session-选择"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 Cookie 与 Session 选择</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-HTTP-1-0-和-HTTP-1-1-的区别"><span class="nav-number">5.</span> <span class="nav-text">5. HTTP 1.0 和 HTTP 1.1 的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-HTTPS"><span class="nav-number">6.</span> <span class="nav-text">6. HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-加密"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 加密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-1-对称密钥加密"><span class="nav-number">6.1.1.</span> <span class="nav-text">6.1.1 对称密钥加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-2-非对称密钥加密"><span class="nav-number">6.1.2.</span> <span class="nav-text">6.1.2 非对称密钥加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-3-HTTPS采用的加密方式"><span class="nav-number">6.1.3.</span> <span class="nav-text">6.1.3 HTTPS采用的加密方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-证书"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-完整性保护"><span class="nav-number">6.3.</span> <span class="nav-text">6.3 完整性保护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-HTTPS-的握手过程"><span class="nav-number">6.4.</span> <span class="nav-text">6.4 HTTPS 的握手过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-浏览器中输入URL地址—-gt-显示主页的过程"><span class="nav-number">7.</span> <span class="nav-text">7. 浏览器中输入URL地址—-&gt;显示主页的过程</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">经常咕咕的菜鸡博客</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+
+  <script src="/js/affix.js?v=7.3.0"></script>
+  <script src="/js/schemes/pisces.js?v=7.3.0"></script>
+
+
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.3.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+    
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://123.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://yoursite.com/2020/02/24/HTTP/";
+    this.page.identifier = "2020/02/24/HTTP/";
+    this.page.title = 'HTTP协议';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://123.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+  
+</script>
+
+</body>
+</html>
