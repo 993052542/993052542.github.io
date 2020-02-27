@@ -260,7 +260,7 @@
                 
               
 
-              <time title="创建时间：2020-02-27 13:11:27 / 修改时间：14:04:22" itemprop="dateCreated datePublished" datetime="2020-02-27T13:11:27+08:00">2020-02-27</time>
+              <time title="创建时间：2020-02-27 13:11:27 / 修改时间：14:05:05" itemprop="dateCreated datePublished" datetime="2020-02-27T13:11:27+08:00">2020-02-27</time>
             </span>
           
             
@@ -295,54 +295,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
+          <h1 id="1-I-O-模型"><a href="#1-I-O-模型" class="headerlink" title="1. I/O 模型"></a>1. I/O 模型</h1><h2 id="1-1-阻塞式-I-O"><a href="#1-1-阻塞式-I-O" class="headerlink" title="1.1 阻塞式 I/O"></a>1.1 阻塞式 I/O</h2><p>​    应用进程被阻塞，直到数据从内核缓冲区复制到应用进程缓冲区才返回。在阻塞的过程中，其它应用进程还可以执行，因此阻塞不意味着操作系统都被阻塞。因为其它的应用进程还可以执行，所有不消耗CPU时间，这种模型的CPU利用率较高。下图中的 recvfrom() 函数可以被看做为系统调用。</p>
+          <!--noindex-->
           
-            <h1 id="1-I-O-模型"><a href="#1-I-O-模型" class="headerlink" title="1. I/O 模型"></a>1. I/O 模型</h1><h2 id="1-1-阻塞式-I-O"><a href="#1-1-阻塞式-I-O" class="headerlink" title="1.1 阻塞式 I/O"></a>1.1 阻塞式 I/O</h2><p>​    应用进程被阻塞，直到数据从内核缓冲区复制到应用进程缓冲区才返回。在阻塞的过程中，其它应用进程还可以执行，因此阻塞不意味着操作系统都被阻塞。因为其它的应用进程还可以执行，所有不消耗CPU时间，这种模型的CPU利用率较高。下图中的 recvfrom() 函数可以被看做为系统调用。</p>
-<p><img src="/2020/02/27/Socket/1.png" alt></p>
-<h2 id="1-2-非阻塞式-I-O"><a href="#1-2-非阻塞式-I-O" class="headerlink" title="1.2 非阻塞式 I/O"></a>1.2 非阻塞式 I/O</h2><p>​    应用进程执行系统调用后，内核返回一个错误码。应用进程可以继续执行，但是需要不断的执行系统调用来获知 I/O 是否完成，这种方式也称为轮询。由于要不停地执行系统调用，因此这种 I/O 模型的 CPU 利用率不高。</p>
-<p><img src="/2020/02/27/Socket/2.png" alt></p>
-<h2 id="1-3-I-O-复用"><a href="#1-3-I-O-复用" class="headerlink" title="1.3 I/O 复用"></a>1.3 I/O 复用</h2><p>​    使用select 或 poll 等待数据，并且可以等待多个套接字中的任何一个变为可读。这一过程会被阻塞，当某一个套接字可读时返回，之后再执行系统调用把数据从内核中复制出来。它可以让单个进程拥有处理多个 I/O 事件的能力，又被称为事件驱动 I/O。假如一个 WEB 服务器没有 I/O 复用，那么每一个 Socket 连接都需要创建一个线程去处理。如果同时有几万个连接，那么就需要创建相同数量的线程。相比于多进程或多线程，I/O 复用不需要进程线程创建和切换的开销。</p>
-<p><img src="/2020/02/27/Socket/3.png" alt></p>
-<h2 id="1-4-信号驱动-I-O"><a href="#1-4-信号驱动-I-O" class="headerlink" title="1.4 信号驱动 I/O"></a>1.4 信号驱动 I/O</h2><p>​    应用进程执行系统调用，内核立即返回，应用进程可以继续执行，也就是说在数据等待阶段应用进程是非阻塞的。内核在数据到达时向应用进程发送一个信号，应用进程收到信号后，再执行系统调用，将数据从内核复制到应用进程中。</p>
-<p><img src="/2020/02/27/Socket/4.png" alt></p>
-<h2 id="1-5-异步-I-O"><a href="#1-5-异步-I-O" class="headerlink" title="1.5 异步 I/O"></a>1.5 异步 I/O</h2><p>​    应用进程执行 aio_read 系统调用会立即返回，应用进程可以继续执行，不会被阻塞，内核会在所有操作执行完毕后向应用进程发送信号。异步 I/O 与信号驱动 I/O 的区别就在于，异步 I/O 的信号是通知应用进程 I/O 完成，而信号驱动 I/O 是通知应用进程可以开始 I/O。</p>
-<p><img src="/2020/02/27/Socket/5.png" alt></p>
-<h1 id="2-I-O-多路复用"><a href="#2-I-O-多路复用" class="headerlink" title="2. I/O 多路复用"></a>2. I/O 多路复用</h1><p>​    select/poll/epoll 都是 I/O 多路复用的具体实现。</p>
-<h2 id="2-1-select"><a href="#2-1-select" class="headerlink" title="2.1 select"></a>2.1 select</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">select</span><span class="params">(<span class="keyword">int</span> n, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>select 允许应用程序监视一组文件描述符，等待一个或多个文件描述符成为就绪状态，从而完成 I/O 操作。</p>
-<ul>
-<li>fd_set 使用1024大小的位图来实现，有三种类型的描述符分别是读、写、异常的描述符集合；</li>
-<li>timeout 为超时参数，调用 select 会一直阻塞，直到有描述符的事件到达或等待的事件超过 timeout；</li>
-<li>缺点：<ul>
-<li>由于位图的限制，只能监听少量的文件描述符；</li>
-<li>当文件描述符的事件完成后，会重置 bitmap ，因此不能复用；</li>
-<li>用户态与内核态切换所带来的开销，需要先从用户进程复制数据到内核，当内核数据准备完成后，又从内核中复制数据到用户进程。</li>
-<li>只能通知文件描述符的置位，无法确定位置，因此需要通过遍历来查找。</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-2-poll"><a href="#2-2-poll" class="headerlink" title="2.2 poll"></a>2.2 poll</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">poll</span><span class="params">(struct pollfd *fds, <span class="keyword">unsigned</span> <span class="keyword">int</span> nfds, <span class="keyword">int</span> timeout)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pollfd</span> &#123;</span></span><br><span class="line">               <span class="keyword">int</span>   fd;         <span class="comment">/* file descriptor */</span></span><br><span class="line">               <span class="keyword">short</span> events;     <span class="comment">/* requested events */</span></span><br><span class="line">               <span class="keyword">short</span> revents;    <span class="comment">/* returned events */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>poll 的功能与 select 相似，但是 poll 中的文件描述符是使用的 pollfd 类型的数组。</p>
-<p>比较：</p>
-<ul>
-<li>select 会修改 bitmap 中的描述符，poll 修改的是 pollfd 结构中的 revents，revents 一开始是0，当有数据来的时候，会变为 POLLIN；</li>
-<li>select 会受到大小的限制，默认不超过1024，而 poll 没有数量的限制；</li>
-<li>select 中的描述符不可重用，但是 poll 中的可以重用；</li>
-<li>select 与 poll 的速度都比较慢，每次需要通过遍历数组来得知那些文件描述符发生了变化，且每次调用都会将数据从用户进程复制到内核，再将数据从内核复制到用户进程。</li>
-</ul>
-<h2 id="2-3-epoll"><a href="#2-3-epoll" class="headerlink" title="2.3 epoll"></a>2.3 epoll</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_create</span><span class="params">(<span class="keyword">int</span> size)</span></span>;</span><br><span class="line">int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)；</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_wait</span><span class="params">(<span class="keyword">int</span> epfd, struct epoll_event * events, <span class="keyword">int</span> maxevents, <span class="keyword">int</span> timeout)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>​    epoll_ctl用于向内核注册新的描述符。已经注册的描述符在内核中会被维护在一棵红黑树上，通过回调函数，内核会将I/O准备好的描述符添加到一个链表中管理，进程调用epoll_wait便可以得到事件完成的描述符链表，解决了以O（n）复杂度来遍历文件描述符的问题。epoll使用一个文件描述符管理多个描述符，将用户关系的文件描述符的事件存放到内核的一个事件表中，这样在用户空间和内核空间的复制只有一次。</p>
-<h3 id="2-3-1-工作模式"><a href="#2-3-1-工作模式" class="headerlink" title="2.3.1 工作模式"></a>2.3.1 工作模式</h3><ul>
-<li>LT模式：当epoll_wait()检测到描述符事件到达时，将此事件通知进程，进程可以不立即处理该事件，下次调用epoll__wait()会再次通知进程</li>
-<li>ET模式：通知之后进程必须立即处理事件，下次再调用epoll_wait()时不会再得到事件到达的通知。很大程度上减少了epoll事件被重复触发的次数，因此效率要比LT模式高</li>
-</ul>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><a href="https://segmentfault.com/a/1190000003063859" target="_blank" rel="noopener">Linux IO 模式及 select、poll、epoll 详解</a></li>
-</ul>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/02/27/Socket/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>

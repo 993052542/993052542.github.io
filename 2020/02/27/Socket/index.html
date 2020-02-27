@@ -55,23 +55,23 @@
   };
 </script>
 
-  <meta name="description" content="1. I/O 模型1.1 阻塞式 I/O​    应用进程被阻塞，直到数据从内核缓冲区复制到应用进程缓冲区才返回。在阻塞的过程中，其它应用进程还可以执行，因此阻塞不意味着操作系统都被阻塞。因为其它的应用进程还可以执行，所有不消耗CPU时间，这种模型的CPU利用率较高。下图中的 recvfrom() 函数可以被看做为系统调用。  1.2 非阻塞式 I/O​    应用进程执行系统调用后，内核返回一个">
+  <meta name="description" content="1. I/O 模型1.1 阻塞式 I/O​    应用进程被阻塞，直到数据从内核缓冲区复制到应用进程缓冲区才返回。在阻塞的过程中，其它应用进程还可以执行，因此阻塞不意味着操作系统都被阻塞。因为其它的应用进程还可以执行，所有不消耗CPU时间，这种模型的CPU利用率较高。下图中的 recvfrom() 函数可以被看做为系统调用。">
 <meta name="keywords" content="计算机网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Scoket">
 <meta property="og:url" content="http://yoursite.com/2020/02/27/Socket/index.html">
 <meta property="og:site_name" content="经常咕咕的菜鸡博客">
-<meta property="og:description" content="1. I/O 模型1.1 阻塞式 I/O​    应用进程被阻塞，直到数据从内核缓冲区复制到应用进程缓冲区才返回。在阻塞的过程中，其它应用进程还可以执行，因此阻塞不意味着操作系统都被阻塞。因为其它的应用进程还可以执行，所有不消耗CPU时间，这种模型的CPU利用率较高。下图中的 recvfrom() 函数可以被看做为系统调用。  1.2 非阻塞式 I/O​    应用进程执行系统调用后，内核返回一个">
+<meta property="og:description" content="1. I/O 模型1.1 阻塞式 I/O​    应用进程被阻塞，直到数据从内核缓冲区复制到应用进程缓冲区才返回。在阻塞的过程中，其它应用进程还可以执行，因此阻塞不意味着操作系统都被阻塞。因为其它的应用进程还可以执行，所有不消耗CPU时间，这种模型的CPU利用率较高。下图中的 recvfrom() 函数可以被看做为系统调用。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2020/02/27/Socket/1.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/27/Socket/2.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/27/Socket/3.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/27/Socket/4.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/27/Socket/5.png">
-<meta property="og:updated_time" content="2020-02-27T06:04:22.659Z">
+<meta property="og:updated_time" content="2020-02-27T06:05:05.911Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Scoket">
-<meta name="twitter:description" content="1. I/O 模型1.1 阻塞式 I/O​    应用进程被阻塞，直到数据从内核缓冲区复制到应用进程缓冲区才返回。在阻塞的过程中，其它应用进程还可以执行，因此阻塞不意味着操作系统都被阻塞。因为其它的应用进程还可以执行，所有不消耗CPU时间，这种模型的CPU利用率较高。下图中的 recvfrom() 函数可以被看做为系统调用。  1.2 非阻塞式 I/O​    应用进程执行系统调用后，内核返回一个">
+<meta name="twitter:description" content="1. I/O 模型1.1 阻塞式 I/O​    应用进程被阻塞，直到数据从内核缓冲区复制到应用进程缓冲区才返回。在阻塞的过程中，其它应用进程还可以执行，因此阻塞不意味着操作系统都被阻塞。因为其它的应用进程还可以执行，所有不消耗CPU时间，这种模型的CPU利用率较高。下图中的 recvfrom() 函数可以被看做为系统调用。">
 <meta name="twitter:image" content="http://yoursite.com/2020/02/27/Socket/1.png">
   <link rel="canonical" href="http://yoursite.com/2020/02/27/Socket/">
 
@@ -272,7 +272,7 @@
                 
               
 
-              <time title="创建时间：2020-02-27 13:11:27 / 修改时间：14:04:22" itemprop="dateCreated datePublished" datetime="2020-02-27T13:11:27+08:00">2020-02-27</time>
+              <time title="创建时间：2020-02-27 13:11:27 / 修改时间：14:05:05" itemprop="dateCreated datePublished" datetime="2020-02-27T13:11:27+08:00">2020-02-27</time>
             </span>
           
             
@@ -308,6 +308,8 @@
 
       
         <h1 id="1-I-O-模型"><a href="#1-I-O-模型" class="headerlink" title="1. I/O 模型"></a>1. I/O 模型</h1><h2 id="1-1-阻塞式-I-O"><a href="#1-1-阻塞式-I-O" class="headerlink" title="1.1 阻塞式 I/O"></a>1.1 阻塞式 I/O</h2><p>​    应用进程被阻塞，直到数据从内核缓冲区复制到应用进程缓冲区才返回。在阻塞的过程中，其它应用进程还可以执行，因此阻塞不意味着操作系统都被阻塞。因为其它的应用进程还可以执行，所有不消耗CPU时间，这种模型的CPU利用率较高。下图中的 recvfrom() 函数可以被看做为系统调用。</p>
+<a id="more"></a>
+
 <p><img src="/2020/02/27/Socket/1.png" alt></p>
 <h2 id="1-2-非阻塞式-I-O"><a href="#1-2-非阻塞式-I-O" class="headerlink" title="1.2 非阻塞式 I/O"></a>1.2 非阻塞式 I/O</h2><p>​    应用进程执行系统调用后，内核返回一个错误码。应用进程可以继续执行，但是需要不断的执行系统调用来获知 I/O 是否完成，这种方式也称为轮询。由于要不停地执行系统调用，因此这种 I/O 模型的 CPU 利用率不高。</p>
 <p><img src="/2020/02/27/Socket/2.png" alt></p>
