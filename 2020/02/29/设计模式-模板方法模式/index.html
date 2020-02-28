@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="题目描述输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。">
-<meta name="keywords" content="剑指offer">
+  <meta name="description" content="模板方法模式模板方法模式（Template Method Pattern），又叫模板模式(Template Pattern)，在一个抽象类公开定义了执行它的方法的模板。它的子类可以按需要重写方法实现，但调用将以抽象类中定义的方式进行。通过模板方法，子类可以重新定义算法的某些步骤，而不用改变算法的结构。">
+<meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑指offer-二叉树的深度">
-<meta property="og:url" content="http://yoursite.com/2020/02/28/剑指offer-二叉树的深度/index.html">
+<meta property="og:title" content="设计模式-模板方法模式">
+<meta property="og:url" content="http://yoursite.com/2020/02/29/设计模式-模板方法模式/index.html">
 <meta property="og:site_name" content="经常咕咕的菜鸡博客">
-<meta property="og:description" content="题目描述输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。">
+<meta property="og:description" content="模板方法模式模板方法模式（Template Method Pattern），又叫模板模式(Template Pattern)，在一个抽象类公开定义了执行它的方法的模板。它的子类可以按需要重写方法实现，但调用将以抽象类中定义的方式进行。通过模板方法，子类可以重新定义算法的某些步骤，而不用改变算法的结构。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-28T08:11:19.321Z">
+<meta property="og:updated_time" content="2020-02-28T16:41:16.590Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑指offer-二叉树的深度">
-<meta name="twitter:description" content="题目描述输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。">
-  <link rel="canonical" href="http://yoursite.com/2020/02/28/剑指offer-二叉树的深度/">
+<meta name="twitter:title" content="设计模式-模板方法模式">
+<meta name="twitter:description" content="模板方法模式模板方法模式（Template Method Pattern），又叫模板模式(Template Pattern)，在一个抽象类公开定义了执行它的方法的模板。它的子类可以按需要重写方法实现，但调用将以抽象类中定义的方式进行。通过模板方法，子类可以重新定义算法的某些步骤，而不用改变算法的结构。">
+  <link rel="canonical" href="http://yoursite.com/2020/02/29/设计模式-模板方法模式/">
 
 
 <script id="page-configurations">
@@ -81,7 +81,7 @@
   };
 </script>
 
-  <title>剑指offer-二叉树的深度 | 经常咕咕的菜鸡博客</title>
+  <title>设计模式-模板方法模式 | 经常咕咕的菜鸡博客</title>
   
 
 
@@ -235,7 +235,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/28/剑指offer-二叉树的深度/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/29/设计模式-模板方法模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="经常咕咕的菜鸡博客">
@@ -249,7 +249,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">剑指offer-二叉树的深度
+          <h1 class="post-title" itemprop="name headline">设计模式-模板方法模式
 
             
           </h1>
@@ -266,7 +266,7 @@
                 
               
 
-              <time title="创建时间：2020-02-28 16:08:23 / 修改时间：16:11:19" itemprop="dateCreated datePublished" datetime="2020-02-28T16:08:23+08:00">2020-02-28</time>
+              <time title="创建时间：2020-02-29 00:28:22 / 修改时间：00:41:16" itemprop="dateCreated datePublished" datetime="2020-02-29T00:28:22+08:00">2020-02-29</time>
             </span>
           
             
@@ -284,8 +284,8 @@
     </span>
     <span class="post-meta-item-text">评论数：</span>
   
-    <a href="/2020/02/28/剑指offer-二叉树的深度/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/28/剑指offer-二叉树的深度/" itemprop="commentCount"></span>
+    <a href="/2020/02/29/设计模式-模板方法模式/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/29/设计模式-模板方法模式/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -301,18 +301,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。</p>
+        <h2 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h2><p>模板方法模式（Template Method Pattern），又叫模板模式(Template Pattern)，在一个抽象类公开定义了执行它的方法的模板。它的子类可以按需要重写方法实现，但调用将以抽象类中定义的方式进行。通过模板方法，子类可以重新定义算法的某些步骤，而不用改变算法的结构。</p>
 <a id="more"></a>
 
-<p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">给定二叉树 [3,9,20,null,null,15,7]，</span><br><span class="line"></span><br><span class="line">    3</span><br><span class="line">   / \</span><br><span class="line">  9  20</span><br><span class="line">    /  \</span><br><span class="line">   15   7</span><br><span class="line">返回它的最大深度 3 。</span><br></pre></td></tr></table></figure>
-
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>通过DFS得到每条路径的长度，再比较得出最大结果即可。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> length = <span class="number">0</span>;</span><br><span class="line">        dfs(root,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode node,<span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (length &gt; res)&#123;</span><br><span class="line">                res = length;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        length++;</span><br><span class="line">        dfs(node.left,length);</span><br><span class="line">        dfs(node.right,length);</span><br><span class="line">        length--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><h4 id="leet-code-二叉树的深度"><a href="#leet-code-二叉树的深度" class="headerlink" title="leet-code 二叉树的深度"></a><a href="https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/" target="_blank" rel="noopener">leet-code 二叉树的深度</a></h4></li>
+<h3 id="模板方法模式的角色"><a href="#模板方法模式的角色" class="headerlink" title="模板方法模式的角色"></a>模板方法模式的角色</h3><ul>
+<li>AbstractClass 抽象类， 类中实现了模板方法(template)，定义了算法的骨架，具体子类需要去实现其它的抽象方法；</li>
+<li>ConcreteClass 具体实现类，实现抽象方法, 以完成算法中特点子类的步骤。</li>
 </ul>
+<h3 id="模板方法模式中的方法"><a href="#模板方法模式中的方法" class="headerlink" title="模板方法模式中的方法"></a>模板方法模式中的方法</h3><ul>
+<li><strong>抽象方法</strong>：一个抽象方法由抽象类声明、由其具体子类实现。</li>
+<li><strong>具体方法</strong>：一个具体方法由一个抽象类或具体类声明并实现。</li>
+<li><strong>钩子方法</strong>：一个钩子方法由一个抽象类或具体类声明并实现，而其子类可能会加以扩展。通常在父类中给出的实现是一个空实现，并以该空实现作为方法的默认实现，当然钩子方法也可以提供一个非空的默认实现</li>
+</ul>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BankTemplateMethod</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">//具体方法</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">takeNumber</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"取号排队"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">evaluate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"反馈评分"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//办理具体的业务，这个方法交给子类去重写</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">transact</span><span class="params">()</span></span>; </span><br><span class="line">  </span><br><span class="line">  <span class="comment">//模板方法，把基本操作组合到一起，子类一般不能重写</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.takeNumber();</span><br><span class="line">    <span class="keyword">this</span>.transact();</span><br><span class="line">    <span class="keyword">this</span>.evaluate();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//子类实现抽象方法的具体实现</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DrawMoney</span> <span class="keyword">extends</span> <span class="title">BankTemplateMethod</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transact</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"我要取款"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ManageMoney</span> <span class="keyword">extends</span> <span class="title">BankTemplateMethod</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transact</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"我要理财"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -324,13 +326,13 @@
           
         
         <div class="post-tags">
-            <a href="/tags/剑指offer/" rel="tag"># 剑指offer</a>
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
           
         </div>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-              <a href="/2020/02/28/剑指offer-二叉搜索树的第k大节点/" rel="next" title="剑指offer-二叉搜索树的第k大节点">
-                <i class="fa fa-chevron-left"></i> 剑指offer-二叉搜索树的第k大节点
+              <a href="/2020/02/28/设计模式-抽象工厂模式/" rel="next" title="设计模式-抽象工厂模式">
+                <i class="fa fa-chevron-left"></i> 设计模式-抽象工厂模式
               </a>
             
           </div>
@@ -338,10 +340,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-              <a href="/2020/02/28/剑指offer-平衡二叉树/" rel="prev" title="剑指offer-平衡二叉树">
-                剑指offer-平衡二叉树 <i class="fa fa-chevron-right"></i>
-              </a>
-            
           </div>
         </div>
     </footer>
@@ -457,7 +455,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#leet-code-二叉树的深度"><span class="nav-number">3.0.1.</span> <span class="nav-text">leet-code 二叉树的深度</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#模板方法模式"><span class="nav-number">1.</span> <span class="nav-text">模板方法模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模板方法模式的角色"><span class="nav-number">1.1.</span> <span class="nav-text">模板方法模式的角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板方法模式中的方法"><span class="nav-number">1.2.</span> <span class="nav-text">模板方法模式中的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体实现"><span class="nav-number">1.3.</span> <span class="nav-text">具体实现</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -582,9 +580,9 @@
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "http://yoursite.com/2020/02/28/剑指offer-二叉树的深度/";
-    this.page.identifier = "2020/02/28/剑指offer-二叉树的深度/";
-    this.page.title = '剑指offer-二叉树的深度';};
+    this.page.url = "http://yoursite.com/2020/02/29/设计模式-模板方法模式/";
+    this.page.identifier = "2020/02/29/设计模式-模板方法模式/";
+    this.page.title = '设计模式-模板方法模式';};
   function loadComments() {
     if (window.DISQUS) {
       DISQUS.reset({

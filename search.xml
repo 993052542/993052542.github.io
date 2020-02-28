@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>设计模式-模板方法模式</title>
+    <url>/2020/02/29/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<h2 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h2><p>模板方法模式（Template Method Pattern），又叫模板模式(Template Pattern)，在一个抽象类公开定义了执行它的方法的模板。它的子类可以按需要重写方法实现，但调用将以抽象类中定义的方式进行。通过模板方法，子类可以重新定义算法的某些步骤，而不用改变算法的结构。</p>
+<a id="more"></a>
+
+<h3 id="模板方法模式的角色"><a href="#模板方法模式的角色" class="headerlink" title="模板方法模式的角色"></a>模板方法模式的角色</h3><ul>
+<li>AbstractClass 抽象类， 类中实现了模板方法(template)，定义了算法的骨架，具体子类需要去实现其它的抽象方法；</li>
+<li>ConcreteClass 具体实现类，实现抽象方法, 以完成算法中特点子类的步骤。</li>
+</ul>
+<h3 id="模板方法模式中的方法"><a href="#模板方法模式中的方法" class="headerlink" title="模板方法模式中的方法"></a>模板方法模式中的方法</h3><ul>
+<li><strong>抽象方法</strong>：一个抽象方法由抽象类声明、由其具体子类实现。</li>
+<li><strong>具体方法</strong>：一个具体方法由一个抽象类或具体类声明并实现。</li>
+<li><strong>钩子方法</strong>：一个钩子方法由一个抽象类或具体类声明并实现，而其子类可能会加以扩展。通常在父类中给出的实现是一个空实现，并以该空实现作为方法的默认实现，当然钩子方法也可以提供一个非空的默认实现</li>
+</ul>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BankTemplateMethod</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">//具体方法</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">takeNumber</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"取号排队"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">evaluate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"反馈评分"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//办理具体的业务，这个方法交给子类去重写</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">transact</span><span class="params">()</span></span>; </span><br><span class="line">  </span><br><span class="line">  <span class="comment">//模板方法，把基本操作组合到一起，子类一般不能重写</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.takeNumber();</span><br><span class="line">    <span class="keyword">this</span>.transact();</span><br><span class="line">    <span class="keyword">this</span>.evaluate();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//子类实现抽象方法的具体实现</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DrawMoney</span> <span class="keyword">extends</span> <span class="title">BankTemplateMethod</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transact</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"我要取款"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ManageMoney</span> <span class="keyword">extends</span> <span class="title">BankTemplateMethod</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transact</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"我要理财"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>设计模式-抽象工厂模式</title>
     <url>/2020/02/28/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<h2 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h2><p>工厂方法模式中，其实我们有一个潜在意识的意识。那就是我们生产的都是同一类产品。抽象工厂模式是工厂方法的仅一步深化，在这个模式中的工厂类不单单可以创建一种产品，而是可以创建一组产品。具体图示：</p>
