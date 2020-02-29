@@ -1,6 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>剑指offer-二叉树的最近公共祖先</title>
+    <url>/2020/03/01/%E5%89%91%E6%8C%87offer-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/</url>
+    <content><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
+<a id="more"></a>
+
+<p>例如，给定如下二叉树:  root = [3,5,1,6,2,0,8,null,null,7,4]</p>
+<p><img src="/2020/03/01/剑指offer-二叉树的最近公共祖先/1.png" alt></p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1</span><br><span class="line">输出: 3</span><br><span class="line">解释: 节点 5 和节点 1 的最近公共祖先是节点 3。</span><br><span class="line"></span><br><span class="line">输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4</span><br><span class="line">输出: 5</span><br><span class="line">解释: 节点 5 和节点 4 的最近公共祖先是节点 5。因为根据定义最近公共祖先节点可以为节点本身。</span><br></pre></td></tr></table></figure>
+
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>如果root是null，则说明我们已经找到最底了，返回null表示没找到<br>如果root与p相等或者与q相等，则返回root<br>如果左子树没找到，递归函数返回null，证明p和q同在root的右侧，那么最终的公共祖先就是右子树找到的结点<br>如果右子树没找到，递归函数返回null，证明p和q同在root的左侧，那么最终的公共祖先就是左子树找到的结点</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode root, TreeNode p, TreeNode q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span> || root == p || root == q) &#123;</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line">        TreeNode left = lowestCommonAncestor(root.left,p,q);</span><br><span class="line">        TreeNode right = lowestCommonAncestor(root.right,p,q);</span><br><span class="line">        <span class="keyword">return</span> left == <span class="keyword">null</span>?right:right==<span class="keyword">null</span>?left:root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><h4 id="leet-code-二叉树的最近公共祖先"><a href="#leet-code-二叉树的最近公共祖先" class="headerlink" title="leet-code 二叉树的最近公共祖先"></a><a href="https://leetcode-cn.com/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/" target="_blank" rel="noopener">leet-code 二叉树的最近公共祖先</a></h4></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>剑指offer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>剑指offer-二叉搜索树的最近公共祖先</title>
+    <url>/2020/02/29/%E5%89%91%E6%8C%87offer-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/</url>
+    <content><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p><a href="https://baike.baidu.com/item/%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/8918834?fr=aladdin" target="_blank" rel="noopener">百度百科</a>中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（<strong>一个节点也可以是它自己的祖先</strong>）。”</p>
+<a id="more"></a>
+
+<p>例如，给定如下二叉搜索树:  root = [6,2,8,0,4,7,9,null,null,3,5]</p>
+<p><img src="/2020/02/29/剑指offer-二叉搜索树的最近公共祖先/1.png" alt></p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8</span><br><span class="line">输出: 6 </span><br><span class="line">解释: 节点 2 和节点 8 的最近公共祖先是 6。</span><br></pre></td></tr></table></figure>
+
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>由于二叉搜索树的性质，当节点的值小于 q 节点的值，大于 p 节点的值，即这个节点是两个节点的公共祖。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode root, TreeNode p, TreeNode q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (root.val &gt; p.val &amp;&amp; root.val &gt; q.val) &#123;</span><br><span class="line">            <span class="keyword">return</span> lowestCommonAncestor(root.left,p,q);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (root.val &lt; p.val &amp;&amp; root.val &lt; q.val) &#123;</span><br><span class="line">            <span class="keyword">return</span> lowestCommonAncestor(root.right,p,q);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;      </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><h4 id="leet-code-二叉搜索树的最近公共祖先"><a href="#leet-code-二叉搜索树的最近公共祖先" class="headerlink" title="leet-code 二叉搜索树的最近公共祖先"></a><a href="https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-zui-jin-gong-gong-zu-xian-lcof/" target="_blank" rel="noopener">leet-code 二叉搜索树的最近公共祖先</a></h4></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>剑指offer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>剑指offer-构建乘积数组</title>
+    <url>/2020/02/29/%E5%89%91%E6%8C%87offer-%E6%9E%84%E5%BB%BA%E4%B9%98%E7%A7%AF%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个数组 A[0,1,…,n-1]，请构建一个数组 B[0,1,…,n-1]，其中 B 中的元素 B[i]=A[0]×A[1]×…×A[i-1]×A[i+1]×…×A[n-1]。不能使用除法。</p>
+<a id="more"></a>
+
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [1,2,3,4,5]</span><br><span class="line">输出: [120,60,40,30,24]</span><br></pre></td></tr></table></figure>
+
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>先从左开始遍历整个数组，创建一个当前数的左边数乘积；再从右开始遍历，创建一个当前数的右边数乘积；最后左边数乘积与右边数乘积相乘即可。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] constructArr(<span class="keyword">int</span>[] a) &#123;</span><br><span class="line">        <span class="keyword">if</span> (a.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span>[] left = <span class="keyword">new</span> <span class="keyword">int</span>[a.length];</span><br><span class="line">        <span class="keyword">int</span>[] right = <span class="keyword">new</span> <span class="keyword">int</span>[a.length];</span><br><span class="line">        left[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        right[a.length - <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; a.length ; i++) &#123;</span><br><span class="line">            left[i] = left[i-<span class="number">1</span>] * a[i-<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = a.length - <span class="number">2</span>; i &gt;= <span class="number">0</span> ; i--) &#123;</span><br><span class="line">            right[i] = right[i+<span class="number">1</span>] * a[i+<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] res =<span class="keyword">new</span> <span class="keyword">int</span>[a.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.length; i++) &#123;</span><br><span class="line">            res[i] = left[i] * right[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><h4 id="leet-code-构建乘积数组"><a href="#leet-code-构建乘积数组" class="headerlink" title="leet-code 构建乘积数组"></a><a href="https://leetcode-cn.com/problems/gou-jian-cheng-ji-shu-zu-lcof/" target="_blank" rel="noopener">leet-code 构建乘积数组</a></h4></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>剑指offer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>剑指offer-不用加减乘除做加法</title>
+    <url>/2020/02/29/%E5%89%91%E6%8C%87offer-%E4%B8%8D%E7%94%A8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%E5%81%9A%E5%8A%A0%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>写一个函数，求两个整数之和，要求在函数体内不得使用 “+”、“-”、“*”、“/” 四则运算符号。</p>
+<!--moore-->
+
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: a = 1, b = 1</span><br><span class="line">输出: 2</span><br></pre></td></tr></table></figure>
+
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>计算 a + b 等价于计算 <code>（a ^ b）+ ((a &amp; b)) &lt;&lt; 1</code>，其中 <code>((a &amp; b)) &lt;&lt; 1</code> 表示进位。因此令 a 等于 <code>((a &amp; b)) &lt;&lt; 1</code> ， 令 b 等于 <code>（a ^ b）</code>，直到 a 变为 0 ，返回 b。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (a != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = a ^ b;</span><br><span class="line">            a = (a &amp; b) &lt;&lt; <span class="number">1</span>;</span><br><span class="line">            b = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><h4 id="leet-code-不用加减乘除做加法"><a href="#leet-code-不用加减乘除做加法" class="headerlink" title="leet-code 不用加减乘除做加法"></a><a href="https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/" target="_blank" rel="noopener">leet-code 不用加减乘除做加法</a></h4></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>剑指offer</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>剑指offer-圆圈中最后剩下的数字</title>
     <url>/2020/02/29/%E5%89%91%E6%8C%87offer-%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97/</url>
     <content><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>0,1,,n-1这n个数字排成一个圆圈，从数字0开始，每次从这个圆圈里删除第m个数字。求出这个圆圈里剩下的最后一个数字。</p>
