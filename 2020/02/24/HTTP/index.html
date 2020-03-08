@@ -67,7 +67,8 @@
 <meta property="og:image" content="http://yoursite.com/2020/02/24/HTTP/2.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/24/HTTP/3.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/24/HTTP/4.png">
-<meta property="og:updated_time" content="2020-02-24T10:20:29.283Z">
+<meta property="og:image" content="http://yoursite.com/2020/02/24/HTTP/5.png">
+<meta property="og:updated_time" content="2020-03-06T07:31:42.081Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP协议">
 <meta name="twitter:description" content="1. URI 与 URL URI：统一资源标识符：标识某一互联网的资源 URL：统一资源定位符：表示互联网资源所在的地址">
@@ -271,11 +272,19 @@
                 
               
 
-              <time title="创建时间：2020-02-24 15:33:24 / 修改时间：18:20:29" itemprop="dateCreated datePublished" datetime="2020-02-24T15:33:24+08:00">2020-02-24</time>
+              <time title="创建时间：2020-02-24 15:33:24" itemprop="dateCreated datePublished" datetime="2020-02-24T15:33:24+08:00">2020-02-24</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-06 15:31:42" itemprop="dateModified" datetime="2020-03-06T15:31:42+08:00">2020-03-06</time>
+              </span>
             
           
 
@@ -422,6 +431,20 @@
 <li>服务器处理请求并返回HTTP响应报文</li>
 <li>浏览器解析并渲染页面</li>
 </ol>
+<h1 id="8-补充知识：DNS"><a href="#8-补充知识：DNS" class="headerlink" title="8. 补充知识：DNS"></a>8. 补充知识：DNS</h1><p>DNS（Domain Name System，域名系统），因特网上作为域名与 IP 地址相互映射的一个分布式数据库，能够使用户更方便的访问互联网，而不用去记住 IP 地址。通过主机名，最终得到该主机名对应的 IP 地址的过程叫做域名解析。</p>
+<p>##8.1 域名解析的过程</p>
+<ol>
+<li>请求一旦发起，如果chrome浏览器，先在浏览器找之前有没有缓存过的域名所对应的 IP 地址，如果有的话，直接跳过域名解析，若是没有，则会寻找硬盘中的 hosts 文件，看看有没有，有的话，直接找到 hosts 文件里面的 IP。</li>
+<li>如果本地的 hosts 文件没能得到对应的 IP 地址，浏览器会发出一个 DNS 请求到本地 DNS 服务器，本地 DNS 服务器一般都是由网络接入商提供，比如中国电信、中国移动等等。</li>
+<li>DNS 请求到达本地 DNS 服务器后，本地 DNS 服务器会首先查询它的缓存记录，如果缓存记录中有此条记录，就可以直接返回结果，此过程是以递归的方式进行查询。如果没有，本地 DNS 服务器还要向 DNS 根服务器进行查阅。</li>
+<li>本地 DNS 服务器机型向域服务器发出请求。假如，请求的是 .com 域服务器。 .com 域服务器收到i请求之后，也不会直接返回域名和 IP 地址的对应关系，而是告诉本地 DNS 服务器，你的域名的解析服务器的地址。</li>
+<li>最后，本地 DNS 服务器向域名的解析服务器发出请求，这时就能收到一个域名和 IP 地址的对应关系，本地 DNS 服务器不仅要把 IP 地址返回给用户电脑，还要把这个映射关系保存在缓存中，以便下次查询时，可以直接返回结果。</li>
+</ol>
+<p><img src="/2020/02/24/HTTP/5.png" alt></p>
+<h2 id="8-2-查询方式"><a href="#8-2-查询方式" class="headerlink" title="8.2 查询方式"></a>8.2 查询方式</h2><p>当局部 DNS 服务器自己不能回答客户端的 DNS 查询时，它就需要向其它 DNS 服务器进行查询。此时的方法有两种。</p>
+<h3 id="8-2-1-递归解析"><a href="#8-2-1-递归解析" class="headerlink" title="8.2.1 递归解析"></a>8.2.1 递归解析</h3><p>局部 DNS 服务器自己负责向其它 DNS 服务器进行查询，一般是先向该域名的根域名服务器查询，再由根域名服务器一级级向下查询，最后得到的查询结果返回给局部 DNS 服务器，再由局部 DNS 服务器返回给客户端。</p>
+<h3 id="8-2-2-迭代解析"><a href="#8-2-2-迭代解析" class="headerlink" title="8.2.2 迭代解析"></a>8.2.2 迭代解析</h3><p>局部 DNS 服务器不是自己向其它 DNS 服务器进行查询，而是把能解析该域名的其它 DNS 服务器的 IP 地址返回给客户端程序，客户端 DNS 程序再继续向这些 DNS 服务器进行查询，直到得到查询结果位为止。也就是说，迭代解析只是帮你寻找相关的服务器而已，而不会帮你去查。</p>
+<h2 id="8-3-DNS-负载均衡"><a href="#8-3-DNS-负载均衡" class="headerlink" title="8.3 DNS 负载均衡"></a>8.3 DNS 负载均衡</h2><p>它的原理就是在 DNS 服务器中为同一个主机名配置多个 IP 地址，在应答 DNS 查询的时候，DNS 服务器对每个查询将以 DNS 文件中主机记录的 IP 地址按顺序返回不同的解析结果，将客户端的访问引导到不同的机器上去。</p>
 
     </div>
 
@@ -514,7 +537,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">88</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -568,7 +591,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-URI-与-URL"><span class="nav-number">1.</span> <span class="nav-text">1. URI 与 URL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-HTTP-方法"><span class="nav-number">2.</span> <span class="nav-text">2. HTTP 方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-HTTP-状态码"><span class="nav-number">3.</span> <span class="nav-text">3. HTTP 状态码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-1XX-表示正在对请求进行处理"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 1XX 表示正在对请求进行处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-2XX-表示请求被成功处理"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 2XX 表示请求被成功处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-3XX-重定向"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 3XX 重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-4XX-客户端错误"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 4XX 客户端错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-5XX-服务器错误"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 5XX 服务器错误</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Cookie-与-Session"><span class="nav-number">4.</span> <span class="nav-text">4. Cookie 与 Session</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Cookie"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 Cookie</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-1-用途"><span class="nav-number">4.1.1.</span> <span class="nav-text">4.1.1 用途</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-2-创建过程"><span class="nav-number">4.1.2.</span> <span class="nav-text">4.1.2 创建过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-3-Secure"><span class="nav-number">4.1.3.</span> <span class="nav-text">4.1.3 Secure</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Session"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 Session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-Cookie-与-Session-选择"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 Cookie 与 Session 选择</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-HTTP-1-0-和-HTTP-1-1-的区别"><span class="nav-number">5.</span> <span class="nav-text">5. HTTP 1.0 和 HTTP 1.1 的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-HTTPS"><span class="nav-number">6.</span> <span class="nav-text">6. HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-加密"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 加密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-1-对称密钥加密"><span class="nav-number">6.1.1.</span> <span class="nav-text">6.1.1 对称密钥加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-2-非对称密钥加密"><span class="nav-number">6.1.2.</span> <span class="nav-text">6.1.2 非对称密钥加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-3-HTTPS采用的加密方式"><span class="nav-number">6.1.3.</span> <span class="nav-text">6.1.3 HTTPS采用的加密方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-证书"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-完整性保护"><span class="nav-number">6.3.</span> <span class="nav-text">6.3 完整性保护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-HTTPS-的握手过程"><span class="nav-number">6.4.</span> <span class="nav-text">6.4 HTTPS 的握手过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-浏览器中输入URL地址—-gt-显示主页的过程"><span class="nav-number">7.</span> <span class="nav-text">7. 浏览器中输入URL地址—-&gt;显示主页的过程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-URI-与-URL"><span class="nav-number">1.</span> <span class="nav-text">1. URI 与 URL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-HTTP-方法"><span class="nav-number">2.</span> <span class="nav-text">2. HTTP 方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-HTTP-状态码"><span class="nav-number">3.</span> <span class="nav-text">3. HTTP 状态码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-1XX-表示正在对请求进行处理"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 1XX 表示正在对请求进行处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-2XX-表示请求被成功处理"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 2XX 表示请求被成功处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-3XX-重定向"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 3XX 重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-4XX-客户端错误"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 4XX 客户端错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-5XX-服务器错误"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 5XX 服务器错误</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Cookie-与-Session"><span class="nav-number">4.</span> <span class="nav-text">4. Cookie 与 Session</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Cookie"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 Cookie</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-1-用途"><span class="nav-number">4.1.1.</span> <span class="nav-text">4.1.1 用途</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-2-创建过程"><span class="nav-number">4.1.2.</span> <span class="nav-text">4.1.2 创建过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-3-Secure"><span class="nav-number">4.1.3.</span> <span class="nav-text">4.1.3 Secure</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Session"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 Session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-Cookie-与-Session-选择"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 Cookie 与 Session 选择</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-HTTP-1-0-和-HTTP-1-1-的区别"><span class="nav-number">5.</span> <span class="nav-text">5. HTTP 1.0 和 HTTP 1.1 的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-HTTPS"><span class="nav-number">6.</span> <span class="nav-text">6. HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-加密"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 加密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-1-对称密钥加密"><span class="nav-number">6.1.1.</span> <span class="nav-text">6.1.1 对称密钥加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-2-非对称密钥加密"><span class="nav-number">6.1.2.</span> <span class="nav-text">6.1.2 非对称密钥加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-3-HTTPS采用的加密方式"><span class="nav-number">6.1.3.</span> <span class="nav-text">6.1.3 HTTPS采用的加密方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-证书"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-完整性保护"><span class="nav-number">6.3.</span> <span class="nav-text">6.3 完整性保护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-HTTPS-的握手过程"><span class="nav-number">6.4.</span> <span class="nav-text">6.4 HTTPS 的握手过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-浏览器中输入URL地址—-gt-显示主页的过程"><span class="nav-number">7.</span> <span class="nav-text">7. 浏览器中输入URL地址—-&gt;显示主页的过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-补充知识：DNS"><span class="nav-number">8.</span> <span class="nav-text">8. 补充知识：DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-查询方式"><span class="nav-number">8.1.</span> <span class="nav-text">8.2 查询方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-1-递归解析"><span class="nav-number">8.1.1.</span> <span class="nav-text">8.2.1 递归解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-2-迭代解析"><span class="nav-number">8.1.2.</span> <span class="nav-text">8.2.2 迭代解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-DNS-负载均衡"><span class="nav-number">8.2.</span> <span class="nav-text">8.3 DNS 负载均衡</span></a></li></ol></li></ol></div>
             
 
           </div>
